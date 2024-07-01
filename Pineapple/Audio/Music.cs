@@ -2,14 +2,10 @@
 
 namespace Pineapple.Audio;
 
-public enum MusicType
-{
-    Mp3,
-    Ogg,
-    Wav
-}
-
-public class Music
+/// <summary>
+/// There can be only one music playing at the time, this represent SDL2_Mixer music which there is can only be 1 music playing at the time
+/// </summary>
+public class Music : Audio, IDisposable
 {
     public static nint GetHookData()
     {
@@ -46,20 +42,20 @@ public class Music
         }
     }
 
-    public static Music Load(string filePath, MusicType musicType)
+    public static Music Load(string filePath, AudioType audioType, int volume = 10, bool loop = false)
     {
         SDL_mixer.MIX_InitFlags mixerInitFlag;
 
-        switch (musicType)
+        switch (audioType)
         {
-            case MusicType.Mp3:
+            case AudioType.Mp3:
                 mixerInitFlag = SDL_mixer.MIX_InitFlags.MIX_INIT_MP3;
                 break;
-            case MusicType.Ogg:
+            case AudioType.Ogg:
                 mixerInitFlag = SDL_mixer.MIX_InitFlags.MIX_INIT_OGG;
                 break;
-            case MusicType.Wav:
-                return new Music(SDL_mixer.Mix_LoadMUS(filePath), musicType);
+            case AudioType.Wav:
+                return new Music(SDL_mixer.Mix_LoadMUS(filePath), audioType, volume, loop);
             default:
                 throw new Exception("Music Type is not supported");
         }
@@ -69,13 +65,10 @@ public class Music
             throw new Exception($"Cannot initialize SDL Mixer Music {SDL_mixer.Mix_GetError()}");
         }
 
-        return new Music(SDL_mixer.Mix_LoadMUS(filePath), musicType);
+        return new Music(SDL_mixer.Mix_LoadMUS(filePath), audioType, volume, loop);
     }
 
-    public nint Handle { get; private set; }
-    public MusicType MusicType { get; }
-
-    public bool Loop { get; set; }
+    public AudioType AudioType { get; }
 
     public double Duration
     {
@@ -85,11 +78,9 @@ public class Music
         }
     }
 
-    public Music(nint handle, MusicType musicType)
+    public Music(nint handle, AudioType audioType, int volume, bool loop) : base(handle, volume, loop)
     {
-        Handle = handle;
-        Loop = false;
-        MusicType = musicType;
+        AudioType = audioType;
     }
 
     public void FadeIn(int loops, int ms)
@@ -102,7 +93,7 @@ public class Music
         }
     }
 
-    public void FadeInMusicPosition(int loops, int ms, double position)
+    public void FadeInPosition(int loops, int ms, double position)
     {
         int error = SDL_mixer.Mix_FadeInMusicPos(Handle, loops, ms, position);
 
@@ -162,7 +153,7 @@ public class Music
         return SDL_mixer.Mix_GetVolumeMusicStream(Handle);
     }
 
-    public void HookMusic(SDL_mixer.MixFuncDelegate mix_func, IntPtr arg)
+    public void Hook(SDL_mixer.MixFuncDelegate mix_func, IntPtr arg)
     {
         SDL_mixer.Mix_HookMusic(mix_func, arg);
     }

@@ -338,8 +338,10 @@ public class ApplicationInternal : GameWindow
 
         if (SDL.SDL_Init(SDL.SDL_INIT_AUDIO) < 0)
         {
-            throw new Exception("Cannot initialize SDL Audio");
+            Logger.LogError("Cannot initialize SDL Audio");
         }
+
+        SDL_mixer.Mix_OpenAudio(frequency: 44100, format: SDL.AUDIO_S16SYS, channels: 2, chunksize: 2048);
     }
 
     protected override void OnLoad()

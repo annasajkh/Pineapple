@@ -15,6 +15,11 @@ public class App
     MusicPlayer musicPlayer;
     Music music;
 
+    List<SoundEffect> soundEffects = new();
+    SoundEffectPlayer soundEffectPlayer;
+
+    Random random = new Random();
+
     public App()
     {
         Application.Load += Load;
@@ -25,13 +30,39 @@ public class App
 
     void Load()
     {
+
         catImage = SKImage.FromEncodedData(Path.Combine("Assets", "Sprites", "this fucking cat.png"));
         musicPlayer = new MusicPlayer();
-        music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), MusicType.Ogg);
-        
-        musicPlayer.Volume = 50;
+        music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), AudioType.Ogg);
+        music.Volume = 50;
+
         musicPlayer.SetSource(music);
         musicPlayer.Play();
+
+        soundEffectPlayer = new SoundEffectPlayer();
+
+        for (int i = 0; i < 3; i++)
+        {
+            soundEffects.Add(SoundEffect.LoadWav(Path.Combine("Assets", "Sounds", "meow.wav"), volume: 128, loop: true));
+        }
+
+        List<Task> playAudioTasks = new();
+
+        foreach (var soundEffect in soundEffects)
+        {
+            Task task = PlaySoundEffectAsync(soundEffectPlayer, soundEffect);
+
+            playAudioTasks.Add(task);
+        }
+    }
+
+    async Task PlaySoundEffectAsync(SoundEffectPlayer soundEffectPlayer, SoundEffect soundEffect)
+    {
+        await Task.Delay(random.Next() % 3000);
+
+        soundEffectPlayer.SetSource(soundEffect);
+        soundEffectPlayer.Play();
+
     }
 
     void Update(float delta)

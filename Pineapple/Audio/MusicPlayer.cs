@@ -2,12 +2,9 @@
 
 namespace Pineapple.Audio;
 
+
 public class MusicPlayer
 {
-    public int Frequency { get; }
-    public int Channels { get; }
-    public int ChunkSize { get; }
-    public int Volume { get; set; } = 10;
     public Music? Music { get; private set; }
 
     private bool paused;
@@ -71,14 +68,9 @@ public class MusicPlayer
     /// </summary>
     public event Action OnFinished;
 
-    public MusicPlayer(int frequency = 44100, int channels = 2, int chunkSize = 2048)
+    public MusicPlayer()
     {
-        Frequency = frequency;
-        Channels = channels;
-        ChunkSize = chunkSize;
         Paused = false;
-
-        SDL_mixer.Mix_OpenAudio(frequency, SDL.AUDIO_S16SYS, channels, chunkSize);
         SDL_mixer.Mix_HookMusicFinished(FinishedCallback);
     }
 
@@ -102,7 +94,7 @@ public class MusicPlayer
     {
         if (Music is Music music)
         {            
-            int volumeError = SDL_mixer.Mix_VolumeMusic(Volume);
+            int volumeError = SDL_mixer.Mix_VolumeMusic(music.Volume);
             if (volumeError == 0)
             {
                 throw new Exception("Cannot set volume");
