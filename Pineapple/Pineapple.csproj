@@ -16,59 +16,29 @@
 	<PropertyGroup>
 		<IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
 		<IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
-		
-		<Is_x86_64 Condition=" '$(PROCESSOR_ARCHITECTURE)' == 'AMD64' or '$(PROCESSOR_ARCHITEW6432)' == 'AMD64' or '$(HostArchitecture)' == 'x64' ">true</Is_x86_64>
-		<Is_x86_32 Condition=" '$(PROCESSOR_ARCHITECTURE)' == 'x86' and '$(PROCESSOR_ARCHITEW6432)' == '' ">true</Is_x86_32>
 	</PropertyGroup>
-
-	<Target Name="TestMessage" AfterTargets="Build" >
-		<Message Text="IsWindows=$(IsWindows)" Importance="high" />
-		<Message Text="IsLinux=$(IsLinux)" Importance="high" />
-		<Message Text="Is_x86_64=$(Is_x86_64)" Importance="high" />
-		<Message Text="Is_x86_32=$(Is_x86_32)" Importance="high" />
-	</Target>
 
 	<ItemGroup>
 		<!-- Windows -->
 		
-		<Content Include="Libraries/SDL2/Win_x86_64/SDL2.dll" Condition="'$(IsWindows)' == 'true' and '$(Is_x86_64)' == 'true'">
+		<Content Include="Libraries/SDL2/Win_x86_64/SDL2.dll" Condition="'$(IsWindows)' == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<Link>SDL2.dll</Link>
 		</Content>
 		
-		<Content Include="Libraries/SDL2/Win_x86_64/SDL2_mixer.dll" Condition="'$(IsWindows)' == 'true' and '$(Is_x86_64)' == 'true'">
+		<Content Include="Libraries/SDL2/Win_x86_64/SDL2_mixer.dll" Condition="'$(IsWindows)' == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
 		
-		<Content Include="Libraries/SDL2/Win_x86_32/SDL2.dll" Condition="'$(IsWindows)' == 'true' and '$(Is_x86_32)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>SDL2.dll</Link>
-		</Content>
-		
-		<Content Include="Libraries/SDL2/Win_x86_32/SDL2_mixer.dll" Condition="'$(IsWindows)' == 'true' and '$(Is_x86_32)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>SDL2_mixer.dll</Link>
-		</Content>
-
 		<!-- Linux -->
 
-		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2.so" Condition="'$(IsLinux)' == 'true' and '$(Is_x86_64)' == 'true'">
+		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2.so" Condition="'$(IsLinux)' == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<Link>SDL2.so</Link>
 		</Content>
 		
-		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2_mixer.so" Condition="'$(IsLinux)' == 'true' and '$(Is_x86_64)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>SDL2_mixer.so</Link>
-		</Content>
-		
-		<Content Include="Libraries/SDL2/Linux_x86_32/SDL2.so" Condition="'$(IsLinux)' == 'true' and '$(Is_x86_32)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>SDL2.so</Link>
-		</Content>
-		
-		<Content Include="Libraries/SDL2/Linux_x86_32/SDL2_mixer.so" Condition="'$(IsLinux)' == 'true' and '$(Is_x86_32)' == 'true'">
+		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2_mixer.so" Condition="'$(IsLinux)' == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
