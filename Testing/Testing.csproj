@@ -15,7 +15,7 @@
 
 
 	<PropertyGroup>
-		<ApplicationIcon>Assets\Icons\Icon.ico</ApplicationIcon>
+		<ApplicationIcon>Assets\Icons\icon.ico</ApplicationIcon>
 	</PropertyGroup>
 	
 	<ItemGroup>
