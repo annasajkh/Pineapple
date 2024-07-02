@@ -17,7 +17,7 @@ public class App
     MusicPlayer? musicPlayer;
     Music? music;
 
-    List<SoundEffect> soundEffects = new();
+    SoundEffect? soundEffect;
     SoundEffectPlayer soundEffectPlayer;
 
     Random random = new Random();
@@ -40,16 +40,12 @@ public class App
         musicPlayer.SetSource(music);
         musicPlayer.Play();
 
-        soundEffectPlayer = new SoundEffectPlayer();
-
-        for (int i = 0; i < 3; i++)
-        {
-            soundEffects.Add(SoundEffect.LoadWav(Path.Combine("Assets", "Sounds", "meow.wav"), volume: 128, loop: true));
-        }
+        soundEffectPlayer = new SoundEffectPlayer(); 
+        soundEffect = SoundEffect.LoadWav(Path.Combine("Assets", "Sounds", "meow.wav"), volume: 128, loop: true);
 
         List<Task> playAudioTasks = new();
 
-        foreach (var soundEffect in soundEffects)
+        for (int i = 0; i < 3; i++)
         {
             Task task = PlaySoundEffectAsync(soundEffectPlayer, soundEffect);
 
