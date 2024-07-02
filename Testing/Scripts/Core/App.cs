@@ -13,13 +13,12 @@ namespace Testing.Scripts.Core;
 public class App
 {
     float time;
-
-    SKImage catImage = SKImage.FromEncodedData(Path.Combine("Assets", "Sprites", "this fucking cat.png"));
-    MusicPlayer musicPlayer = new MusicPlayer();
-    Music music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), AudioType.Ogg);
+    SKImage? catImage;
+    MusicPlayer? musicPlayer;
+    Music? music;
 
     List<SoundEffect> soundEffects = new();
-    SoundEffectPlayer soundEffectPlayer = new SoundEffectPlayer();
+    SoundEffectPlayer soundEffectPlayer;
 
     Random random = new Random();
 
@@ -33,10 +32,15 @@ public class App
 
     void Load()
     {
+        catImage = SKImage.FromEncodedData(Path.Combine("Assets", "Sprites", "this fucking cat.png"));
+        musicPlayer = new MusicPlayer();
+        music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), AudioType.Ogg);
         music.Volume = 50;
 
         musicPlayer.SetSource(music);
         musicPlayer.Play();
+
+        soundEffectPlayer = new SoundEffectPlayer();
 
         for (int i = 0; i < 3; i++)
         {
@@ -66,7 +70,7 @@ public class App
     {
         if (Input.IsKeyPressed(Keys.P))
         {
-            musicPlayer.Paused = !musicPlayer.Paused;
+            musicPlayer!.Paused = !musicPlayer.Paused;
 
             if (musicPlayer.Paused)
             {
@@ -104,8 +108,8 @@ public class App
 
     void Unload()
     {
-        catImage.Dispose();
-        music.Dispose();
+        catImage!.Dispose();
+        music!.Dispose();
     }
 
     public void Run()
