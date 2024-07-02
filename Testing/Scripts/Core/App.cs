@@ -1,4 +1,6 @@
-﻿using OpenTK.Mathematics;
+﻿// Ignore Spelling: App
+
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using Pineapple.Audio;
@@ -11,12 +13,13 @@ namespace Testing.Scripts.Core;
 public class App
 {
     float time;
-    SKImage catImage;
-    MusicPlayer musicPlayer;
-    Music music;
+
+    SKImage catImage = SKImage.FromEncodedData(Path.Combine("Assets", "Sprites", "this fucking cat.png"));
+    MusicPlayer musicPlayer = new MusicPlayer();
+    Music music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), AudioType.Ogg);
 
     List<SoundEffect> soundEffects = new();
-    SoundEffectPlayer soundEffectPlayer;
+    SoundEffectPlayer soundEffectPlayer = new SoundEffectPlayer();
 
     Random random = new Random();
 
@@ -30,16 +33,10 @@ public class App
 
     void Load()
     {
-
-        catImage = SKImage.FromEncodedData(Path.Combine("Assets", "Sprites", "this fucking cat.png"));
-        musicPlayer = new MusicPlayer();
-        music = Music.Load(Path.Combine("Assets", "Musics", "Different Heaven & Sian Area - Feel Like Horrible [NCS Release].ogg"), AudioType.Ogg);
         music.Volume = 50;
 
         musicPlayer.SetSource(music);
         musicPlayer.Play();
-
-        soundEffectPlayer = new SoundEffectPlayer();
 
         for (int i = 0; i < 3; i++)
         {
