@@ -4,7 +4,6 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
-using Pineapple.Bindings.SDL;
 using SixLabors.ImageSharp.PixelFormats;
 using SkiaSharp;
 using static Pineapple.Core.ApplicationInternal;

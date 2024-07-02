@@ -1,5 +1,4 @@
-﻿using Pineapple.Bindings.SDL;
-using Pineapple.Bindings.SDL2;
+﻿using Pineapple.Bindings.SDL2;
 
 namespace Pineapple.Audio;
 

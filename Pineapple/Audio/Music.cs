@@ -49,10 +49,10 @@ public class Music : Audio, IDisposable
         switch (audioType)
         {
             case AudioType.Mp3:
-                mixerInitFlag = Pineapple.Bindings.SDL2.MIX_InitFlags.MIX_INIT_MP3;
+                mixerInitFlag = SDL_mixer.MIX_InitFlags.MIX_INIT_MP3;
                 break;
             case AudioType.Ogg:
-                mixerInitFlag = Pineapple.Bindings.SDL2.MIX_InitFlags.MIX_INIT_OGG;
+                mixerInitFlag = SDL_mixer.MIX_InitFlags.MIX_INIT_OGG;
                 break;
             case AudioType.Wav:
                 return new Music(SDL_mixer.Mix_LoadMUS(filePath), audioType, volume, loop);
