@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 #endregion
 
-namespace Pineapple.Bindings.SDL;
+namespace Pineapple.Bindings.SDL2;
 
 public static class SDL
 {

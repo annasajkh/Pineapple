@@ -10,6 +10,7 @@ using SkiaSharp;
 using static Pineapple.Core.ApplicationInternal;
 using Image = SixLabors.ImageSharp.Image;
 using OpenTKImage = OpenTK.Windowing.Common.Input.Image;
+using Pineapple.Bindings.SDL2;
 
 namespace Pineapple.Core;
 
