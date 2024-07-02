@@ -43,6 +43,8 @@ public class App
         soundEffectPlayer = new SoundEffectPlayer(); 
         soundEffect = SoundEffect.LoadWav(Path.Combine("Assets", "Sounds", "meow.wav"), volume: 128, loop: true);
 
+        soundEffectPlayer.SetSource(soundEffect);
+
         List<Task> playAudioTasks = new();
 
         for (int i = 0; i < 3; i++)
@@ -57,7 +59,6 @@ public class App
     {
         await Task.Delay(random.Next() % 3000);
 
-        soundEffectPlayer.SetSource(soundEffect);
         soundEffectPlayer.Play();
 
     }
