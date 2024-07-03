@@ -44,14 +44,10 @@ public class App
         soundEffect = SoundEffect.LoadWav(Path.Combine("Assets", "Sounds", "meow.wav"), volume: 128, loop: true);
 
         soundEffectPlayer.SetSource(soundEffect);
-
-        List<Task> playAudioTasks = new();
-
+        
         for (int i = 0; i < 3; i++)
         {
             Task task = PlaySoundEffectAsync(soundEffectPlayer, soundEffect);
-
-            playAudioTasks.Add(task);
         }
     }
 
@@ -60,7 +56,6 @@ public class App
         await Task.Delay(random.Next() % 3000);
 
         soundEffectPlayer.Play();
-
     }
 
     void Update(float delta)
@@ -99,7 +94,7 @@ public class App
         canvas.Restore();
 
         paint.Color = SKColors.White;
-
+        
         canvas.DrawCircle(new SKPoint(Input.MousePosition.X, Input.MousePosition.Y), 50, paint);
     }
 
