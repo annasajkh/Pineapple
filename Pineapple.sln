@@ -5,8 +5,6 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pineapple", "Pineapple\Pineapple.csproj", "{F3A20685-4E7B-4EB9-9BA5-9B831DB9F9C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{369BBD2B-C809-49F4-9F4F-74A53F1AA6C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{F3A20685-4E7B-4EB9-9BA5-9B831DB9F9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A20685-4E7B-4EB9-9BA5-9B831DB9F9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A20685-4E7B-4EB9-9BA5-9B831DB9F9C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{369BBD2B-C809-49F4-9F4F-74A53F1AA6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{369BBD2B-C809-49F4-9F4F-74A53F1AA6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{369BBD2B-C809-49F4-9F4F-74A53F1AA6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{369BBD2B-C809-49F4-9F4F-74A53F1AA6C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
