@@ -59,28 +59,28 @@
 		<!-- Windows -->
 		<Content Include="runtimes/SDL2/win-x32/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2.dll</PackagePath>
+			<PackagePath>runtimes/win-x32/native/SDL2.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/win-x32/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2_mixer.dll</PackagePath>
+			<PackagePath>runtimes/win-x32/native/SDL2_mixer.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/win-x64/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2.dll</PackagePath>
+			<PackagePath>runtimes/win-x64/native/SDL2.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2_mixer.dll</PackagePath>
+			<PackagePath>runtimes/win-x64/native/SDL2_mixer.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
@@ -88,28 +88,28 @@
 		<!-- Linux -->
 		<Content Include="runtimes/SDL2/linux-x32/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX32) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2.so</PackagePath>
+			<PackagePath>runtimes/linux-x32/native/SDL2.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/linux-x32/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX32) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2_mixer.so</PackagePath>
+			<PackagePath>runtimes/linux-x32/native/SDL2_mixer.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/linux-x64/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX64) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2.so</PackagePath>
+			<PackagePath>runtimes/linux-x64/native/SDL2.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX64) == 'true'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/SDL2_mixer.so</PackagePath>
+			<PackagePath>runtimes/linux-x64/native/SDL2_mixer.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
