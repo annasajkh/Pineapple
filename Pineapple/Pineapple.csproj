@@ -39,21 +39,11 @@
 		<IsX64>true</IsX64>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">
-		<DefineConstants>OS_WINDOWS_X32</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">
-		<DefineConstants>OS_WINDOWS_X64</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX32) == 'true'">
-		<DefineConstants>OS_LINUX_X32</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX64) == 'true'">
-		<DefineConstants>OS_LINUX_X64</DefineConstants>
-	</PropertyGroup>
+	<Target Name="LogProperties">
+		<Message Text="OS: $(OS)" Importance="high" />
+		<Message Text="IsX32: $(IsX32)" Importance="high" />
+		<Message Text="IsX64: $(IsX64)" Importance="high" />
+	</Target>
 
 	<ItemGroup>
 		<!-- Windows -->
