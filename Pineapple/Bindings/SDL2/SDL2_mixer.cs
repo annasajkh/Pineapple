@@ -65,15 +65,7 @@ public static class SDL_mixer
 {
     #region SDL2# Variables
 
-#if OS_WINDOWS_X32
-    private const string nativeLibName = "runtimes/win-x32/native/SDL2_mixer.dll";
-#elif OS_WINDOWS_X64
-    private const string nativeLibName = "runtimes/win-x64/native/SDL2_mixer.dll";
-#elif OS_LINUX_X32
-    private const string nativeLibName = "runtimes/linux-x32/native/SDL2_mixer.so";
-#elif OS_LINUX_X64
-    private const string nativeLibName = "runtimes/linux-x64/native/SDL2_mixer.so";
-#endif
+    private const string nativeLibName = "SDL2_mixer";
 
     #endregion
 
