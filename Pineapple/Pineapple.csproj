@@ -31,38 +31,30 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture) == 'X32'">
-		<IsX32>true</IsX32>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture) == 'X64'">
-		<IsX64>true</IsX64>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- Windows -->
-		<Content Include="runtimes/SDL2/win-x32/SDL2.dll" Condition="$(TargetPlatform.OSFamily) == 'Windows' AND $(IsX32) == 'true'">
+		<Content Include="runtimes/SDL2/win-x32/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X32'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/win-x32/native/SDL2.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/win-x32/SDL2_mixer.dll" Condition="$(TargetPlatform.OSFamily) == 'Windows' AND $(IsX32) == 'true'">
+		<Content Include="runtimes/SDL2/win-x32/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) == 'Windows' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X32'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/win-x32/native/SDL2_mixer.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/win-x64/SDL2.dll" Condition="$(TargetPlatform.OSFamily) == 'Windows' AND $(IsX64) == 'true'">
+		<Content Include="runtimes/SDL2/win-x64/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/win-x64/native/SDL2.dll</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll" Condition="(TargetPlatform.OSFamily) == 'Windows' AND $(IsX64) == 'true'">
+		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/win-x64/native/SDL2_mixer.dll</PackagePath>
 			<Pack>True</Pack>
@@ -70,28 +62,28 @@
 		</Content>
 
 		<!-- Linux -->
-		<Content Include="runtimes/SDL2/linux-x32/SDL2.so" Condition="$(TargetPlatform.OSFamily) == 'Linux' AND $(IsX32) == 'true'">
+		<Content Include="runtimes/SDL2/linux-x32/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X32'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/linux-x32/native/SDL2.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/linux-x32/SDL2_mixer.so" Condition="$(TargetPlatform.OSFamily) == 'Linux' AND $(IsX32) == 'true'">
+		<Content Include="runtimes/SDL2/linux-x32/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X32'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/linux-x32/native/SDL2_mixer.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/linux-x64/SDL2.so" Condition="$(TargetPlatform.OSFamily) == 'Linux' AND $(IsX64) == 'true'">
+		<Content Include="runtimes/SDL2/linux-x64/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/linux-x64/native/SDL2.so</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
-		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so" Condition="$(TargetPlatform.OSFamily) == 'Linux' AND $(IsX64) == 'true'">
+		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackagePath>runtimes/linux-x64/native/SDL2_mixer.so</PackagePath>
 			<Pack>True</Pack>
