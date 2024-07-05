@@ -15,6 +15,7 @@
 
 	<PropertyGroup>
 		<PackageId>PineappleFramework</PackageId>
+		<Version>1.0.1</Version>
 		<Title>Pineapple</Title>
 		<Description>minimal framework using OpenTK + SkiaSharp + SDL2 + SDL2_mixer</Description>
 		<Authors>AnnasVirtual</Authors>
@@ -32,33 +33,31 @@
 
 	<ItemGroup>
 		<!-- Windows -->
-
 		<Content Include="runtimes/SDL2/win-x64/SDL2.dll">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>runtimes/SDL2/win-x64/native</PackagePath>
+			<PackagePath>/</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>runtimes/win-x64/native</PackagePath>
+			<PackagePath>/</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
 
 		<!-- Linux -->
-
 		<Content Include="runtimes/SDL2/linux-x64/SDL2.so">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>runtimes/linux/native</PackagePath>
+			<PackagePath>/</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>runtimes/linux-x64/native</PackagePath>
+			<PackagePath>/</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
