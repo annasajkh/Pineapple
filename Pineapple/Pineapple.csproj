@@ -14,34 +14,65 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
-		<IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
+		<PackageId>PineappleFramework</PackageId>
+		<Title>Pineapple</Title>
+		<Description>minimal framework using OpenTK + SkiaSharp + SDL2 + SDL2_mixer</Description>
+		<Authors>AnnasVirtual</Authors>
+		<Copyright>Copyright (c) 2006-2019 Stefanos Apostolopoulos for the Open Toolkit project. Copyright (c) 2015-2016 Xamarin, Inc. Copyright (c) 2017-2018 Microsoft Corporation. Copyright (c) 2021-2021 Gabrie Frigo.</Copyright>
+		<PackageProjectUrl>https://github.com/annasajkh/Pineapple</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/annasajkh/Pineapple</RepositoryUrl>
+		<PackageTags>csharp, graphics, opentk, skiasharp, graphics-framework, sdl2-cs</PackageTags>
+		<PackageLicenseFile>README.md</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- Windows -->
-		
-		<Content Include="Libraries/SDL2/Win_x86_64/SDL2.dll" Condition="'$(IsWindows)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+		<Content Include="runtimes/SDL2/win-x64/SDL2.dll">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/SDL2/win-x64/native</PackagePath>
+			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
-		
-		<Content Include="Libraries/SDL2/Win_x86_64/SDL2_mixer.dll" Condition="'$(IsWindows)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x64/native</PackagePath>
+			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
-		
+
 		<!-- Linux -->
 
-		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2.so" Condition="'$(IsLinux)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<Content Include="runtimes/SDL2/linux-x64/SDL2.so">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/linux/native</PackagePath>
+			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
-		
-		<Content Include="Libraries/SDL2/Linux_x86_64/SDL2_mixer.so" Condition="'$(IsLinux)' == 'true'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/linux-x64/native</PackagePath>
+			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="../icon.png">
+	    <Pack>true</Pack>
+	    <PackagePath>/</PackagePath>
+	  </None>
+	  <None Include="../README.md">
+	    <Pack>true</Pack>
+	    <PackagePath>/</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -51,5 +82,4 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.8" />
 	</ItemGroup>
-
 </Project>
