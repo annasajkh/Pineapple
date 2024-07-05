@@ -28,11 +28,12 @@
 
 #region Using Statements
 #if NET6_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
 #endif
+#endregion
+
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
-#endregion
 
 namespace Pineapple.Bindings.SDL2;
 
@@ -40,7 +41,15 @@ public static class SDL
 {
     #region SDL2# Variables
 
-    private const string nativeLibName = "SDL2";
+#if OS_WINDOWS_X32
+    private const string nativeLibName = "runtimes/win-x32/native/SDL2.dll";
+#elif OS_WINDOWS_X64
+    private const string nativeLibName = "runtimes/win-x64/native/SDL2.dll";
+#elif OS_LINUX_X32
+    private const string nativeLibName = "runtimes/linux-x32/native/SDL2.so";
+#elif OS_LINUX_X64
+    private const string nativeLibName = "runtimes/linux-x64/native/SDL2.so";
+#endif
 
     #endregion
 

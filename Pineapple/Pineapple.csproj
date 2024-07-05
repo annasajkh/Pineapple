@@ -15,7 +15,7 @@
 
 	<PropertyGroup>
 		<PackageId>PineappleFramework</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.5</Version>
 		<Title>Pineapple</Title>
 		<Description>minimal framework using OpenTK + SkiaSharp + SDL2 + SDL2_mixer</Description>
 		<Authors>AnnasVirtual</Authors>
@@ -31,18 +31,56 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture) == 'X32'">
+		<IsX32>true</IsX32>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture) == 'X64'">
+		<IsX64>true</IsX64>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">
+		<DefineConstants>OS_WINDOWS_X32</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">
+		<DefineConstants>OS_WINDOWS_X64</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX32) == 'true'">
+		<DefineConstants>OS_LINUX_X32</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux')) AND $(IsX64) == 'true'">
+		<DefineConstants>OS_LINUX_X64</DefineConstants>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- Windows -->
+		<Content Include="runtimes/SDL2/win-x32/SDL2.dll">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x32/native</PackagePath>
+			<Pack>True</Pack>
+			<Link>SDL2.dll</Link>
+		</Content>
+
+		<Content Include="runtimes/SDL2/win-x32/SDL2_mixer.dll">
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX32) == 'true'">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x32/native</PackagePath>
+			<Pack>True</Pack>
+			<Link>SDL2_mixer.dll</Link>
+		</Content>
+
 		<Content Include="runtimes/SDL2/win-x64/SDL2.dll">
-			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/</PackagePath>
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x64/native</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.dll</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll">
-			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/</PackagePath>
+			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Windows')) AND $(IsX64) == 'true'">PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes/win-x64/native</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.dll</Link>
 		</Content>
@@ -50,14 +88,14 @@
 		<!-- Linux -->
 		<Content Include="runtimes/SDL2/linux-x64/SDL2.so">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/</PackagePath>
+			<PackagePath>runtimes/linux-x64/native</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2.so</Link>
 		</Content>
 
 		<Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so">
 			<CopyToOutputDirectory Condition="$([MSBuild]::IsOSPlatform('Linux'))">PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>/</PackagePath>
+			<PackagePath>runtimes/linux-x64/native</PackagePath>
 			<Pack>True</Pack>
 			<Link>SDL2_mixer.so</Link>
 		</Content>
