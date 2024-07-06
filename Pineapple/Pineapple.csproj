@@ -31,7 +31,7 @@
     </PropertyGroup>
 
     <Target Name="SetLinuxArchitecture" Condition="'$(OS)' != 'Windows_NT'">
-        <Exec Command="uname -m &gt; $(MSBuildProjectDirectory)/uname_output.txt" />
+        <Exec Command="uname -m > $(MSBuildProjectDirectory)/uname_output.txt" />
         <ReadLinesFromFile File="$(MSBuildProjectDirectory)/uname_output.txt">
             <Output TaskParameter="Lines" PropertyName="UnameOutput" />
         </ReadLinesFromFile>
