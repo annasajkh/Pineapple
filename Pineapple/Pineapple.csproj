@@ -30,49 +30,16 @@
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     </PropertyGroup>
 
-    <Target Name="SetLinuxArchitecture" Condition="'$(OS)' != 'Windows_NT'">
-        <Exec Command="uname -m > $(MSBuildProjectDirectory)/uname_output.txt" />
-        <ReadLinesFromFile File="$(MSBuildProjectDirectory)/uname_output.txt">
-            <Output TaskParameter="Lines" PropertyName="UnameOutput" />
-        </ReadLinesFromFile>
-        <PropertyGroup>
-            <ProcessorArchitecture>$(UnameOutput.Trim())</ProcessorArchitecture>
-        </PropertyGroup>
-        <Message Text="Detected Linux architecture: $(ProcessorArchitecture)" Importance="High" />
-    </Target>
-
-    <PropertyGroup>
-        <ProcessorArchitecture Condition="'$(OS)' == 'Windows_NT'">$(PROCESSOR_ARCHITECTURE)</ProcessorArchitecture>
-    </PropertyGroup>
-
-    <Target Name="LogArchitecture">
-        <Message Text="Processor Architecture: $(ProcessorArchitecture)" Importance="High" />
-    </Target>
-
     <ItemGroup>
         <!-- Windows -->
-        <Content Include="runtimes/SDL2/win-x32/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(ProcessorArchitecture)' == 'x86'">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <PackagePath>runtimes/win-x32/native/SDL2.dll</PackagePath>
-            <Pack>True</Pack>
-            <Link>SDL2.dll</Link>
-        </Content>
-
-        <Content Include="runtimes/SDL2/win-x32/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(ProcessorArchitecture)' == 'x86'">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <PackagePath>runtimes/win-x32/native/SDL2_mixer.dll</PackagePath>
-            <Pack>True</Pack>
-            <Link>SDL2_mixer.dll</Link>
-        </Content>
-
-        <Content Include="runtimes/SDL2/win-x64/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(ProcessorArchitecture)' == 'AMD64'">
+        <Content Include="runtimes/SDL2/win-x64/SDL2.dll" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <PackagePath>runtimes/win-x64/native/SDL2.dll</PackagePath>
             <Pack>True</Pack>
             <Link>SDL2.dll</Link>
         </Content>
 
-        <Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows')) AND '$(ProcessorArchitecture)' == 'AMD64'">
+        <Content Include="runtimes/SDL2/win-x64/SDL2_mixer.dll" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <PackagePath>runtimes/win-x64/native/SDL2_mixer.dll</PackagePath>
             <Pack>True</Pack>
@@ -80,42 +47,20 @@
         </Content>
 
         <!-- Linux -->
-        <Content Include="runtimes/SDL2/linux-x32/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$(ProcessorArchitecture)' == 'i686'">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <PackagePath>runtimes/linux-x32/native/SDL2.so</PackagePath>
-            <Pack>True</Pack>
-            <Link>SDL2.so</Link>
-        </Content>
-
-        <Content Include="runtimes/SDL2/linux-x32/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$(ProcessorArchitecture)' == 'i686'">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <PackagePath>runtimes/linux-x32/native/SDL2_mixer.so</PackagePath>
-            <Pack>True</Pack>
-            <Link>SDL2_mixer.so</Link>
-        </Content>
-
-        <Content Include="runtimes/SDL2/linux-x64/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$(ProcessorArchitecture)' == 'x86_64'">
+        <Content Include="runtimes/SDL2/linux-x64/SDL2.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <PackagePath>runtimes/linux-x64/native/SDL2.so</PackagePath>
             <Pack>True</Pack>
             <Link>SDL2.so</Link>
         </Content>
 
-        <Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux')) AND '$(ProcessorArchitecture)' == 'x86_64'">
+        <Content Include="runtimes/SDL2/linux-x64/SDL2_mixer.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <PackagePath>runtimes/linux-x64/native/SDL2_mixer.so</PackagePath>
             <Pack>True</Pack>
             <Link>SDL2_mixer.so</Link>
         </Content>
     </ItemGroup>
-
-    <!-- Ensure the SetLinuxArchitecture target runs before build -->
-    <Target Name="BeforeBuild" DependsOnTargets="SetLinuxArchitecture" />
-
-    <Target Name="CopyLibraries" AfterTargets="Build">
-        <Message Text="Copying SDL2 libraries for architecture: $(ProcessorArchitecture)" Importance="High" />
-        <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)runtimes\$(ProcessorArchitecture)\native\" />
-    </Target>
 
     <ItemGroup>
         <None Include="../icon.png">
