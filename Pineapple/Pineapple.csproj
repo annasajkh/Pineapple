@@ -33,8 +33,12 @@
 
     <PropertyGroup>
         <ProcessorArchitecture Condition="'$(OS)' == 'Windows_NT'">$(PROCESSOR_ARCHITECTURE)</ProcessorArchitecture>
-        <ProcessorArchitecture Condition="'$(OS)' != 'Windows_NT'">$([System.IO.Path]::GetFileNameWithoutExtension($([System.Diagnostics.Process]::Start('uname', '-m').StandardOutput.ReadToEnd().Trim())))</ProcessorArchitecture>
+        <ProcessorArchitecture Condition="'$(OS)' != 'Windows_NT'">$([System.Diagnostics.Process]::Start('uname', '-m').StandardOutput.ReadToEnd().Trim())</ProcessorArchitecture>
     </PropertyGroup>
+
+    <Target Name="LogArchitecture">
+        <Message Text="Processor Architecture: $(ProcessorArchitecture)" Importance="High" />
+    </Target>
 
     <ItemGroup>
         <!-- Windows -->
@@ -95,6 +99,11 @@
             <Link>SDL2_mixer.so</Link>
         </Content>
     </ItemGroup>
+
+    <Target Name="CopyLibraries" AfterTargets="Build">
+        <Message Text="Copying SDL2 libraries for architecture: $(ProcessorArchitecture)" Importance="High" />
+        <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)runtimes\$(ProcessorArchitecture)\native\" />
+    </Target>
 
 	<ItemGroup>
 	  <None Include="../icon.png">
