@@ -9,7 +9,6 @@ using SkiaSharp;
 using static Pineapple.Core.ApplicationInternal;
 using Image = SixLabors.ImageSharp.Image;
 using OpenTKImage = OpenTK.Windowing.Common.Input.Image;
-using Pineapple.Bindings.SDL2;
 
 namespace Pineapple.Core;
 
@@ -335,13 +334,6 @@ public class ApplicationInternal : GameWindow
             TextAlign = SKTextAlign.Center,
             TextSize = 32
         };
-
-        if (SDL.SDL_Init(SDL.SDL_INIT_AUDIO) < 0)
-        {
-            Logger.LogError("Cannot initialize SDL Audio");
-        }
-
-        SDL_mixer.Mix_OpenAudio(frequency: 44100, format: SDL.AUDIO_S16SYS, channels: 2, chunksize: 2048);
     }
 
     protected override void OnLoad()
@@ -394,7 +386,5 @@ public class ApplicationInternal : GameWindow
         base.OnUnload();
 
         Unload?.Invoke();
-
-        SDL.SDL_Quit();
     }
 }
