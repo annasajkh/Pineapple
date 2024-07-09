@@ -4,9 +4,9 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
+using Pineapple.Managers;
 using SixLabors.ImageSharp.PixelFormats;
 using SkiaSharp;
-using static Pineapple.Core.ApplicationInternal;
 using Image = SixLabors.ImageSharp.Image;
 using OpenTKImage = OpenTK.Windowing.Common.Input.Image;
 
@@ -14,10 +14,7 @@ namespace Pineapple.Core;
 
 public static class Application
 {
-    public static event Action? Load;
-    public static event UpdateEvent? Update;
-    public static event DrawEvent? Draw;
-    public static event Action? Unload;
+    public static SceneManager? SceneManager { get; private set; }
 
     /// <summary>
     ///  Gets or sets a double representing the update frequency, in hertz
@@ -208,8 +205,10 @@ public static class Application
 
     public static ApplicationInternal ApplicationInternal { get; private set; }
 
-    public static void Run(string title, Vector2i size, Vector2i? windowPosition = null, WindowState windowState = WindowState.Normal, WindowBorder windowBorder = WindowBorder.Fixed, bool transparent = false, VSyncMode vsync = VSyncMode.On, Vector2i? minimumSize = null, Vector2i? maximumSize = null)
+    public static void Run(string title, Vector2i size, SceneManager sceneManager, Vector2i? windowPosition = null, WindowState windowState = WindowState.Normal, WindowBorder windowBorder = WindowBorder.Fixed, bool transparent = false, VSyncMode vsync = VSyncMode.On, Vector2i? minimumSize = null, Vector2i? maximumSize = null)
     {
+        SceneManager = sceneManager;
+
         ApplicationInternal = new ApplicationInternal(title, size, windowPosition, windowState, windowBorder, transparent, vsync, minimumSize, maximumSize);
 
         ApplicationInternal.Load += Load;
@@ -220,8 +219,10 @@ public static class Application
         ApplicationInternal.Run();
     }
 
-    public static void Run(NativeWindowSettings nativeWindowSettings)
+    public static void Run(NativeWindowSettings nativeWindowSettings, SceneManager sceneManager)
     {
+        SceneManager = sceneManager;
+
         ApplicationInternal = new ApplicationInternal(nativeWindowSettings);
 
         ApplicationInternal.Load += Load;
@@ -230,6 +231,26 @@ public static class Application
         ApplicationInternal.Unload += Unload;
 
         ApplicationInternal.Run();
+    }
+
+    private static void Load()
+    {
+        SceneManager?.ActiveScene?.Load();
+    }
+
+    private static void Update(float delta)
+    {
+        SceneManager?.ActiveScene?.Update(delta);
+    }
+
+    private static void Draw(SKCanvas canvas, SKPaint paint)
+    {
+        SceneManager?.ActiveScene?.Draw(canvas, paint);
+    }
+
+    private static void Unload()
+    {
+        SceneManager?.ActiveScene?.Unload();
     }
 }
 
