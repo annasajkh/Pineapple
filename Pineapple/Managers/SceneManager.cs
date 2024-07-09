@@ -78,6 +78,6 @@ public sealed class SceneManager
         ActiveScene.UnloadInternal();
         ActiveScene = scenes[name];
 
-        ActiveScene.Load();
+        ActiveScene.LoadInternal();
     }
 }

@@ -14,7 +14,21 @@ namespace Pineapple.Core;
 
 public static class Application
 {
+    /// <summary>
+    /// The application scene manager
+    /// </summary>
     public static SceneManager? SceneManager { get; private set; }
+
+    /// <summary>
+    /// The application logger
+    /// </summary>
+    public static ILogger<ApplicationInternal> Logger
+    {
+        get
+        {
+            return ApplicationInternal.Logger;
+        }
+    }
 
     /// <summary>
     ///  Gets or sets a double representing the update frequency, in hertz
@@ -235,7 +249,7 @@ public static class Application
 
     private static void Load()
     {
-        SceneManager?.ActiveScene?.Load();
+        SceneManager?.ActiveScene?.LoadInternal();
     }
 
     private static void Update(float delta)
@@ -250,7 +264,7 @@ public static class Application
 
     private static void Unload()
     {
-        SceneManager?.ActiveScene?.Unload();
+        SceneManager?.ActiveScene?.UnloadInternal();
     }
 }
 
