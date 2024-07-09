@@ -243,9 +243,9 @@ public static class Application
         SceneManager?.ActiveScene?.Update(delta);
     }
 
-    private static void Draw(SKCanvas canvas, SKPaint paint)
+    private static void Draw(SKCanvas canvas)
     {
-        SceneManager?.ActiveScene?.Draw(canvas, paint);
+        SceneManager?.ActiveScene?.Draw(canvas);
     }
 
     private static void Unload()
@@ -272,7 +272,7 @@ public class ApplicationInternal : GameWindow
         }
     }
 
-    public delegate void DrawEvent(SKCanvas canvas, SKPaint paint);
+    public delegate void DrawEvent(SKCanvas canvas);
     public delegate void UpdateEvent(float delta);
 
     public event Action? Load;
@@ -288,7 +288,6 @@ public class ApplicationInternal : GameWindow
     SKSurface surface;
     GRBackendRenderTarget renderTarget;
     SKCanvas canvas;
-    SKPaint paint;
 
     public ApplicationInternal(string title, Vector2i size, Vector2i? windowPosition = null, WindowState windowState = WindowState.Normal, WindowBorder windowBorder = WindowBorder.Fixed, bool transparent = false, VSyncMode vsync = VSyncMode.On, Vector2i? minimumSize = null, Vector2i? maximumSize = null) : this(new NativeWindowSettings
     {
@@ -346,15 +345,6 @@ public class ApplicationInternal : GameWindow
         surface = SKSurface.Create(grContext, renderTarget, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
 
         canvas = surface.Canvas;
-
-        paint = new SKPaint
-        {
-            Color = SKColors.White,
-            IsAntialias = true,
-            Style = SKPaintStyle.Fill,
-            TextAlign = SKTextAlign.Center,
-            TextSize = 32
-        };
     }
 
     protected override void OnLoad()
@@ -389,7 +379,7 @@ public class ApplicationInternal : GameWindow
     {
         base.OnRenderFrame(frameEventArgs);
 
-        Draw?.Invoke(canvas, paint);
+        Draw?.Invoke(canvas);
 
         canvas.Flush();
         SwapBuffers();
@@ -397,8 +387,6 @@ public class ApplicationInternal : GameWindow
 
     protected override void OnUnload()
     {
-        paint.Dispose();
-
         surface.Dispose();
         renderTarget.Dispose();
         grContext.Dispose();
