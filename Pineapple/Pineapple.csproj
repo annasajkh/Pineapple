@@ -14,7 +14,7 @@
 
     <PropertyGroup>
         <PackageId>PineappleFramework</PackageId>
-        <Version>1.2.0</Version>
+        <Version>1.2.1</Version>
         <Title>Pineapple</Title>
         <Description>minimal framework using OpenTK + SkiaSharp</Description>
         <Authors>AnnasVirtual</Authors>
