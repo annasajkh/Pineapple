@@ -40,6 +40,7 @@ public sealed class SceneManager
         }
 
         ActiveScene = scenes[name];
+        ActiveScene.LoadInternal();
     }
 
     /// <summary>
