@@ -20,7 +20,7 @@ public sealed class Timer
     /// <summary>
     /// Pause the timer if it's true run otherwise
     /// </summary>
-    public bool Paused { get; private set; }
+    public bool Paused { get; private set; } = true;
 
     /// <summary>
     /// The event that get called when TimeLeft reach 0
