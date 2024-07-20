@@ -61,7 +61,8 @@ public sealed class SceneManager
         }
 
         ActiveScene.UnloadInternal();
-        ActiveScene = scenes[name];
+
+        ActiveScene = (Scene)Activator.CreateInstance(scenes[name].GetType())!;
 
         ActiveScene.LoadInternal();
     }
